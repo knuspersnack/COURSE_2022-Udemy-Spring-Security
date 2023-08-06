@@ -15,6 +15,10 @@ public class Customer {
     private String pwd;
     private String role;
 
+    public Customer(String pwd) {
+        this.pwd = pwd;
+    }
+
     public int getId() {
         return id;
     }

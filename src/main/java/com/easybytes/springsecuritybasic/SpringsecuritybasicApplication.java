@@ -7,9 +7,11 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScans;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
-@ComponentScan({"com.easybytes.controller", "com.easybytes.config", "com.easybytes.service"})
+
+
 @SpringBootApplication
-@EnableJpaRepositories("com.easybytes.repository")
+@ComponentScan({"com.easybytes.controller", "com.easybytes.config", "com.easybytes.service"})
+//@EnableJpaRepositories("com.easybytes.repository")
 @EntityScan({"com.easybytes.model"})
 public class SpringsecuritybasicApplication {
 

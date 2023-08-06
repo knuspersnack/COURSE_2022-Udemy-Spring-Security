@@ -19,9 +19,7 @@ import com.easybytes.repository.CustomerRepository;
 @Component
 public class EazyBankUsernamePwdAuthenticationProvider implements AuthenticationProvider {
 
-	@Autowired
-	private CustomerRepository customerRepository;
-	
+
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
@@ -29,7 +27,7 @@ public class EazyBankUsernamePwdAuthenticationProvider implements Authentication
 	public Authentication authenticate(Authentication authentication) {
 		String username = authentication.getName();
 		String pwd = authentication.getCredentials().toString();
-		List<Customer> customer = customerRepository.findByEmail(username);
+		List<Customer> customer = List.of(new Customer(pwd));
 		if (customer.size() > 0) {
 			//PW: 12345
 			if (passwordEncoder.matches(pwd, customer.get(0).getPwd())) {
