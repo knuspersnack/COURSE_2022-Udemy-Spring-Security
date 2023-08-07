@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @ComponentScan({"com.easybytes.controller", "com.easybytes.config", "com.easybytes.service"})
-//@EnableJpaRepositories("com.easybytes.repository")
+@EnableJpaRepositories("com.easybytes.repository")
 @EntityScan({"com.easybytes.model"})
 public class SpringsecuritybasicApplication {
 

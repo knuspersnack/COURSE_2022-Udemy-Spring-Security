@@ -28,8 +28,8 @@ public class ProjectSecurityConfigNew {
          */
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .antMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
-                        .antMatchers("/notices", "/contact").permitAll()
+                        .antMatchers("/myBalance", "/myLoans", "/myCards").authenticated()
+                        .antMatchers("/myAccount", "/notices", "/contact").permitAll()
                         .antMatchers("/h2-console/**").permitAll() // Allow H2 console access without authentication
                 )
                 .httpBasic(Customizer.withDefaults());

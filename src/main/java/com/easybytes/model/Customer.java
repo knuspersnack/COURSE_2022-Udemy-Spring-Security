@@ -10,21 +10,24 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
-    private int id;
+    private int customer_id;
     private String email;
     private String pwd;
     private String role;
+
+    public Customer() {
+    }
 
     public Customer(String pwd) {
         this.pwd = pwd;
     }
 
     public int getId() {
-        return id;
+        return customer_id;
     }
 
     public void setId(int id) {
-        this.id = id;
+        this.customer_id = id;
     }
 
     public String getEmail() {
