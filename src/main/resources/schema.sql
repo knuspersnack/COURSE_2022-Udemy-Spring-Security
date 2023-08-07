@@ -1,6 +1,4 @@
-create database eazybank;
-
-use eazybank;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE `users` (
 `id` INT NOT NULL AUTO_INCREMENT,
@@ -9,12 +7,14 @@ CREATE TABLE `users` (
 `enabled` INT NOT NULL,
 PRIMARY KEY (`id`));
 
+DROP TABLE IF EXISTS authorities;
 CREATE TABLE `authorities` (
   `id` int NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
   `authority` varchar(45) NOT NULL,
   PRIMARY KEY (`id`));
 
+DROP TABLE IF EXISTS customer;
 CREATE TABLE `customer` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(45) NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`id`)
 );
 
-
+DROP TABLE IF EXISTS customer;
 CREATE TABLE `customer` (
   `customer_id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -35,7 +35,7 @@ CREATE TABLE `customer` (
   PRIMARY KEY (`customer_id`)
 );
 
-
+DROP TABLE IF EXISTS accounts;
 CREATE TABLE `accounts` (
   `customer_id` int NOT NULL,
    `account_number` int NOT NULL,
@@ -47,6 +47,7 @@ CREATE TABLE `accounts` (
   CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE
 );
 
+DROP TABLE IF EXISTS account_transactions;
 CREATE TABLE `account_transactions` (
   `transaction_id` varchar(200) NOT NULL,
   `account_number` int NOT NULL,
@@ -58,12 +59,12 @@ CREATE TABLE `account_transactions` (
   `closing_balance` int NOT NULL,
   `create_dt` date DEFAULT NULL,
   PRIMARY KEY (`transaction_id`),
-  KEY `customer_id` (`customer_id`),
+  KEY `customer_id_2` (`customer_id`),
   KEY `account_number` (`account_number`),
   CONSTRAINT `accounts_ibfk_2` FOREIGN KEY (`account_number`) REFERENCES `accounts` (`account_number`) ON DELETE CASCADE,
-  CONSTRAINT `acct_user_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE
+  CONSTRAINT `acct_user_ibfk_2` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE
 );
-
+DROP TABLE IF EXISTS loans;
 CREATE TABLE `loans` (
   `loan_number` int NOT NULL AUTO_INCREMENT,
   `customer_id` int NOT NULL,
@@ -74,10 +75,10 @@ CREATE TABLE `loans` (
   `outstanding_amount` int NOT NULL,
   `create_dt` date DEFAULT NULL,
   PRIMARY KEY (`loan_number`),
-  KEY `customer_id` (`customer_id`),
+  KEY `customer_id_3` (`customer_id`),
   CONSTRAINT `loan_customer_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE
 );
-
+DROP TABLE IF EXISTS cards;
 CREATE TABLE `cards` (
   `card_id` int NOT NULL AUTO_INCREMENT,
   `card_number` varchar(100) NOT NULL,
@@ -88,10 +89,10 @@ CREATE TABLE `cards` (
   `available_amount` int NOT NULL,
   `create_dt` date DEFAULT NULL,
   PRIMARY KEY (`card_id`),
-  KEY `customer_id` (`customer_id`),
+  KEY `customer_id_4` (`customer_id`),
   CONSTRAINT `card_customer_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`customer_id`) ON DELETE CASCADE
 );
- 
+DROP TABLE IF EXISTS notice_details;
 CREATE TABLE `notice_details` (
   `notice_id` int NOT NULL AUTO_INCREMENT,
   `notice_summary` varchar(200) NOT NULL,
@@ -102,7 +103,7 @@ CREATE TABLE `notice_details` (
   `update_dt` date DEFAULT NULL,
   PRIMARY KEY (`notice_id`)
 );
-
+DROP TABLE IF EXISTS contact_messages;
 CREATE TABLE `contact_messages` (
   `contact_id` varchar(50) NOT NULL,
   `contact_name` varchar(50) NOT NULL,

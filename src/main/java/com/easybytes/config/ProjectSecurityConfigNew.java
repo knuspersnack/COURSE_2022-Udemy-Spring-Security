@@ -22,14 +22,17 @@ public class ProjectSecurityConfigNew {
      */
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-
+        http.csrf().ignoringAntMatchers("/h2-console/**");
         /**
          * Custom configurations as per our requirement
          */
-        http.authorizeHttpRequests((auth) -> auth
-                .antMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
-                .antMatchers("/notices", "/contact").permitAll()
-        ).httpBasic(Customizer.withDefaults());
+        http
+                .authorizeHttpRequests((auth) -> auth
+                        .antMatchers("/myAccount", "/myBalance", "/myLoans", "/myCards").authenticated()
+                        .antMatchers("/notices", "/contact").permitAll()
+                        .antMatchers("/h2-console/**").permitAll() // Allow H2 console access without authentication
+                )
+                .httpBasic(Customizer.withDefaults());
         return http.build();
 
     }
